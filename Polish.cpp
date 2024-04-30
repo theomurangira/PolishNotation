@@ -15,117 +15,42 @@ std::string convertToPostfix(std::string infix)
     (2) Operators supported are + - * and /
     (3) Supported brackets are () [] and {}
     */
+ /*Algorithm to implement: 
    
-   std::string postfix;
-   std::stack<char> s;
-   char c;
-   for(size_t i=0;i<infix.size();++i)
-   {
-     c=infix[i];
-     if(c=='(' || c=='[' || c=='{')
-     {
-      s.push(c);
-     }
-     else if (c>='1' && c<='9' )
-     {
-       postfix +=c;
-     }
-     else if (c==']' || c==')'|| c=='}'){
-        switch(c)
-        {
-            case ']':
-                while(s.top()!='['){
-                     postfix +=s.top();
-                     s.pop();
-                }
-                s.pop();
-                break;
-            case ')':
-                while(s.top()!='('){
-                    postfix +=s.top();
-                    s.pop();
-                }
-                s.pop();
-                break;
-            case '}':
-                while(s.top()!='{'){
-                    postfix +=s.top();
-                    s.pop();
-    
-                }
-                s.pop();
-                break;
-        }
-     }
-     else if(c=='+' || c=='-')
-     { if( s.empty())  s.push(c);
-       else {
-        while(s.top()=='-' || s.top()=='+'|| s.top()=='*' ||s.top()=='/')
-        {
-            postfix +=s.top();
-            s.pop();
-        }
-        s.push(c);
-       }
-     }
-     else if (c=='*' ||c=='/')
-     {
-        if(s.empty()) s.push(c);
-        else{
-        while(s.top()=='*' || s.top()=='/')
-        {
-            postfix +=s.top();
-            s.pop();
-        }
-        s.push(c);
-        }
-     }
-   }
-while(!s.empty())
-{
-    postfix +=s.top();
-    s.pop();
-}
- return postfix;
+     Initialize an empty stack S
+     Initialize an empty string that will be returned
+     Scan the infix expression from left to right
+      If you encounter an opening parenthesis ( or [  or {
+        push it on the stack
+      If you encounter an operand (1 - 9):
+         append it to the output string
+      If you encounter a closing parenthesis ) or ] or }:
+         Pop each symbol from the stack up to (including) the corresponding 
+         opening parenthesis, appending each popped symbol to the output string
+         Discard both the opening and closing parenthesis
+      If you encounter an operator + or - or * or /:
+          Pop all operators with the same or higher precedence and append them to the output string
+          then push the operator on the stack
+      When the entire input string is read:
+           Pop the remaining symbols from the stack, appending them to the output string
+      Return the output string  (Which is the postfix expression)          
+   */
+   
+   
 }
 
 int evaluate(std::string postfix)
 {
-    std::stack<int> s;
-    int result=0;
-    for(size_t i=0; i<postfix.size();++i)
-    {
-        char c=postfix[i];
-        int op1=0;
-        int op2=0;
-        if( std::isdigit(c))
-          s.push(c-'\0');
-        else if (c=='+'|| c=='-' ||c=='*' ||c=='/')
-          {
-            op2=s.top();
-            s.pop();
-            op1=s.top();
-            s.pop();
-            switch(c)
-            {
-                case '+':
-                  result=op1+op2;
-                  break;
-                case '-':
-                  result=op1-op2;
-                  break;
-                case '*':
-                  result=op1*op2;
-                  break;
-                case '/':
-                result =op1/op2;
-                break;
-
-            }
-            s.push(result);
-
-          }
-    }
-    result =s.top();
-    return result;
+    /* This function takes as input a postfix expression
+     and returns the value of that expression, obtained as follows:
+     Initialize an empty stack of integers
+     Scan the postfix expression from left to right:
+        When you encounter an operand, push it on the stack
+        When you encounter an operator, pop two operands from the stack
+        and apply the operation on them, then push back the result on the
+        stack.
+        Once the postfix expression is entirely read, the value of the
+        expression is on the stack
+     
+     */
 }
